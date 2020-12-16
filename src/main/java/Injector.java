@@ -1,9 +1,13 @@
+import MainPackage.GeneralInterface;
+import MainPackage.Interface1;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.lang.annotation.Annotation;
 import java.lang.management.ManagementFactory;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Properties;
 
@@ -20,19 +24,22 @@ public class Injector {
         properties.load(fileInputStream);
 
         for(Field field: fields){
-            if(field.getAnnotation(AutoInjectable.class) instanceof AutoInjectable){
+            if(field.getAnnotation(AutoInjectable.class) != null){
 
-                Class cls = Class.forName(properties.getProperty(field.getAnnotatedType().toString()));
-
+                var cls = Class.forName(properties.getProperty(field.getAnnotatedType().toString()));
+                Object implInstance = null;
+                try {
+                     implInstance = cls.getDeclaredConstructor().newInstance();
+                } catch (InstantiationException | InvocationTargetException | NoSuchMethodException e) {
+                    e.printStackTrace();
+                }
                 field.setAccessible(true);
-                System.out.println(field.getName());
 
-
-                System.out.println(cls.getNestHost().getName());
+//                System.out.println(cls.getNestHost().getName());
+                System.out.println("this is impl" + implInstance);
 
                 System.out.println(cls.getCanonicalName());
-                field.set(object, cls);
-
+                field.set(object, implInstance);
             }
         }
 

@@ -12,5 +12,8 @@ public class Main {
             e.printStackTrace();
         }
 
+        Object a = new Object();
+
+
     }
 }
