@@ -2,10 +2,13 @@ package MainPackage;
 
 public class Implementation3 implements Interface2 {
     @Override
-    public void InterfaceMethod() {
-        System.out.println("C");
+    public String InterfaceMethod() {
+        return "Implementation3 ";
     }
 
+    /**
+     * Конструктор
+     */
     public Implementation3() {
     }
 }

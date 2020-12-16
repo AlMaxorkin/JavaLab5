@@ -8,12 +8,8 @@ public class Main {
             Injector.inject(example);
             System.out.println();
             example.foo();
-        } catch (IOException | ClassNotFoundException | IllegalAccessException | NoSuchFieldException e) {
+        } catch (IOException | ClassNotFoundException | IllegalAccessException e) {
             e.printStackTrace();
         }
-
-        Object a = new Object();
-
-
     }
 }

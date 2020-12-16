@@ -1,5 +1,8 @@
 package MainPackage;
 
-public interface Interface2 extends GeneralInterface {
-    void InterfaceMethod();
+public interface Interface2{
+    /**
+     *Конструктор
+     */
+    String InterfaceMethod();
 }
